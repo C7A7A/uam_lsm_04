@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_expenses">Expenses</string>
     <string name="title_analytics">Analytics</string>
+    <string name="expenser">Expenser</string>
+    <string name="expenser_descriptions">Observe your expenses</string>
+    <string name="add_expense">Add expense</string>
+    <string name="insert_expense">Insert expense</string>
 </resources>
