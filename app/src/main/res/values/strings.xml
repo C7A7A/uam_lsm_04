@@ -3,8 +3,19 @@
     <string name="title_home">Home</string>
     <string name="title_expenses">Expenses</string>
     <string name="title_analytics">Analytics</string>
+    <string name="title_categories">Categories</string>
     <string name="expenser">Expenser</string>
     <string name="expenser_descriptions">Observe your expenses</string>
-    <string name="add_expense">Add expense</string>
+    <string name="add">Add</string>
     <string name="insert_expense">Insert expense</string>
+    <string name="choose_category">category</string>
+    <string name="new_expanse_period">New Expanse Period</string>
+    <string name="budget">Budget:</string>
+    <string name="planned_expenses">Planned expenses:</string>
+    <string name="expense_period_date">Period date:</string>
+    <string name="add_new_expense">Add new expense</string>
+    <string name="confirm_new_expense_period">Confirm new period</string>
+    <string name="add_new_category">Add new category</string>
+
+
 </resources>

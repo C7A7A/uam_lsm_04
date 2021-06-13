@@ -12,6 +12,11 @@
         android:title="@string/title_expenses" />
 
     <item
+        android:id="@+id/navigation_categories"
+        android:icon="@drawable/ic_categories_black_24dp"
+        android:title="@string/title_categories" />
+
+    <item
         android:id="@+id/navigation_analytics"
         android:icon="@drawable/ic_analytics_black_24dp"
         android:title="@string/title_analytics" />

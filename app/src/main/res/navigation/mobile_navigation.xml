@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -20,5 +20,10 @@
         android:name="com.example.expenser.ui.expenses.ExpensesFragment"
         android:label="@string/title_expenses"
         tools:layout="@layout/fragment_expenses" />
+    <fragment
+        android:id="@+id/navigation_categories"
+        android:name="com.example.expenser.ui.categories.Categories"
+        android:label="@string/title_categories"
+        tools:layout="@layout/fragment_categories" />
 
 </navigation>
