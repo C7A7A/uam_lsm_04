@@ -9,13 +9,19 @@
     <string name="add">Add</string>
     <string name="insert_expense">Insert expense</string>
     <string name="choose_category">category</string>
-    <string name="new_expanse_period">New Expanse Period</string>
+    <string name="new_expanse_period">New Expense Period</string>
     <string name="budget">Budget:</string>
     <string name="planned_expenses">Planned expenses:</string>
     <string name="expense_period_date">Period date:</string>
     <string name="add_new_expense">Add new expense</string>
     <string name="confirm_new_expense_period">Confirm new period</string>
     <string name="add_new_category">Add new category</string>
+    <string name="title_login">Login/Register</string>
+    <string name="hint_email">Enter Email</string>
+    <string name="hint_password">Enter password</string>
+    <string name="login">Login</string>
+    <string name="register">Don\'t have an account? Register</string>
+    <string name="register_button">Register</string>
 
 
 </resources>

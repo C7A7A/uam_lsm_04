@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_expenses" />
     <fragment
         android:id="@+id/navigation_categories"
-        android:name="com.example.expenser.ui.categories.Categories"
+        android:name="com.example.expenser.ui.categories.CategoriesFragment"
         android:label="@string/title_categories"
         tools:layout="@layout/fragment_categories" />
 
