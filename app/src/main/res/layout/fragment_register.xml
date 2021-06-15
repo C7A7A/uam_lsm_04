@@ -17,7 +17,7 @@
         android:id="@+id/email_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
+        android:layout_margin="5dp"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
         android:textColor="#000"
@@ -28,7 +28,7 @@
         android:id="@+id/password_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
+        android:layout_margin="5dp"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
         android:textColor="#000"
@@ -39,7 +39,7 @@
         android:id="@+id/register_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
+        android:layout_margin="5dp"
         android:text="@string/register_button" />
 
     <TextView
