@@ -2,25 +2,25 @@ package com.example.expenser.ui.categories
 
 import androidx.lifecycle.ViewModel
 import com.example.expenser.data.Category
+import com.google.firebase.database.*
 
 class CategoriesViewModel : ViewModel() {
 
-    private lateinit var categories: MutableList<String>
+    private lateinit var database: DatabaseReference
 
-    fun basicCategoriesList(): List<Category> {
-         return listOf(
+    fun basicCategoriesList(): MutableList<Category> {
+         return mutableListOf(
              Category("Entertainment"),
              Category("Sport"),
              Category("Home"),
-             Category( "Bills"),
+             Category("Bills"),
              Category("Health"),
              Category("Transport"),
              Category("Food"),
              Category("Clothes"),
-             Category("VOD"),
              Category("Hobby"),
-             Category("Car"),
              Category("Other")
         )
     }
+
 }
