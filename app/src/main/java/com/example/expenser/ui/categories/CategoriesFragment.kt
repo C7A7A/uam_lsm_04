@@ -36,6 +36,7 @@ class CategoriesFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_categories, container, false)
+
         (activity as MainActivity).fetchCategoriesFromDatabase(view)
 
         view.add_new_category_button.setOnClickListener {

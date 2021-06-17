@@ -72,16 +72,39 @@ class MainActivity : AppCompatActivity() {
                     for (category in dataSnapshot.children) {
                         val categoryFromDB = category.getValue(Category::class.java)
                         categoriesList.add(categoryFromDB!!)
-                        Log.w(category.getValue(Category::class.java)!!.name, "XDDDDDDDDDDDDDDDDDDDDDDDDD")
                     }
 
-                    view.categories_list.adapter = CategoriesAdapter(categoriesList)
+                    view.categories_list.adapter = CategoriesAdapter(categoriesList, this@MainActivity)
                     view.categories_list.layoutManager = LinearLayoutManager(baseContext)
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+                Log.w(ContentValues.TAG, "fetchCategories:onCancelled", databaseError.toException())
+            }
+        })
+    }
+
+    fun deleteCategoryFromDatabase(categoryToDelete: Category) {
+        database = Firebase.database.reference
+
+        val user = HelperUtils.getCurrentUser()
+
+        val categoryQuery = database.child(user?.uid.toString()).child("categories").orderByChild("name").equalTo(categoryToDelete.name)
+
+        categoryQuery.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (category in dataSnapshot.children) {
+                        category.ref.removeValue()
+                        Toast.makeText(baseContext, "Category deleted successfully", Toast.LENGTH_SHORT).show()
+                        return
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w(ContentValues.TAG, "deleteCategory:onCancelled", databaseError.toException())
             }
         })
     }

@@ -6,8 +6,6 @@ import com.google.firebase.database.*
 
 class CategoriesViewModel : ViewModel() {
 
-    private lateinit var database: DatabaseReference
-
     fun basicCategoriesList(): MutableList<Category> {
          return mutableListOf(
              Category("Entertainment"),
