@@ -21,6 +21,19 @@
     <string name="login">Login</string>
     <string name="register">Don\'t have an account? Register</string>
     <string name="register_button">Register</string>
-
+    <string name="pick_date">PICK DATE</string>
+    <string name="category_budget">Category Budget</string>
+    <string name="cancel">Cancel</string>
+    <string name="_0">0</string>
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
 
 </resources>

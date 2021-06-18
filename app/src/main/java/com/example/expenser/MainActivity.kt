@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,12 +22,14 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.add_category_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_categories.view.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
     private lateinit var categoriesList: MutableList<Category>
+    lateinit var spinner: Spinner
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    fun fetchCategoriesFromDatabase(view: View) {
+    fun fetchCategoriesFromDatabase(view: View, purpose: String) {
         val user = HelperUtils.getCurrentUser()
         if (user != null) {
             database = FirebaseDatabase.getInstance().getReference(user.uid).child("categories")
@@ -74,8 +78,16 @@ class MainActivity : AppCompatActivity() {
                         categoriesList.add(categoryFromDB!!)
                     }
 
-                    view.categories_list.adapter = CategoriesAdapter(categoriesList, this@MainActivity)
-                    view.categories_list.layoutManager = LinearLayoutManager(baseContext)
+                    if (purpose == "category_list") {
+                        view.categories_list.adapter = CategoriesAdapter(categoriesList, this@MainActivity)
+                        view.categories_list.layoutManager = LinearLayoutManager(baseContext)
+                    }
+                    else if (purpose == "spinner_expenses") {
+                        spinner = view.add_category_expenses_spinner
+                        val adapter = ArrayAdapter(this@MainActivity, R.layout.spinner_item, categoriesList.map { it.name })
+                        adapter.setDropDownViewResource(R.layout.spinner_item)
+                        spinner.adapter = adapter
+                    }
                 }
             }
 

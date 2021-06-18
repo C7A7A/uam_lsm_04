@@ -27,7 +27,6 @@ import kotlinx.android.synthetic.main.fragment_categories.*
 import kotlinx.android.synthetic.main.fragment_categories.view.*
 import kotlinx.android.synthetic.main.single_category.view.*
 
-
 class CategoriesFragment : Fragment() {
 
     override fun onCreateView(
@@ -37,7 +36,7 @@ class CategoriesFragment : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_categories, container, false)
 
-        (activity as MainActivity).fetchCategoriesFromDatabase(view)
+        (activity as MainActivity).fetchCategoriesFromDatabase(view, "category_list")
 
         view.add_new_category_button.setOnClickListener {
             val newCategory = view.add_new_category.text.toString().trim()
