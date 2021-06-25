@@ -15,15 +15,18 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.expenser.data.Budget
 import com.example.expenser.data.Category
+import com.example.expenser.data.CategoryBudget
 import com.example.expenser.ui.categories.CategoriesAdapter
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
+import com.example.expenser.ui.home.HomeAdapter
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.add_category_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_categories.view.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_single_budget.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -61,6 +64,62 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
+    fun insertBudgetToDatabase(newBudget: Budget) {
+        database = Firebase.database.reference
+
+        val id = database.push().key
+        val user = HelperUtils.getCurrentUser()
+
+        database.child(user?.uid.toString()).child("budgets").child(id.toString()).setValue(newBudget)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(baseContext, "Budget was added successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(baseContext, task.exception.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    fun updateActiveBudget(view: View, categoryName: String, categoryExpense: String) {
+        database = Firebase.database.reference
+
+        val user = HelperUtils.getCurrentUser()
+        if (user != null) {
+            database = FirebaseDatabase.getInstance().getReference(user.uid).child("budgets")
+        }
+
+        categoriesList = mutableListOf()
+
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    categoriesList.clear()
+                    for (budget in dataSnapshot.children) {
+                        val budgetFromDB = budget.getValue(Budget::class.java)
+                        if (budgetFromDB?.active == true) {
+                            budgetFromDB.categories?.forEachIndexed { index, it ->
+                                if (it.name == categoryName) {
+                                    val moneySpent = (it.moneySpent?.toInt()?.plus(categoryExpense.toInt())).toString()
+                                    val moneySpentBudget = (budgetFromDB.moneySpent?.toInt()?.plus(moneySpent.toInt())).toString()
+
+                                    database.child(budget.key.toString()).child("categories").child(index.toString()).child("moneySpent").setValue(moneySpent)
+                                    database.child(budget.key.toString()).child("moneySpent").setValue(moneySpentBudget)
+                                }
+                            }
+                            return
+                        }
+                    }
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w(ContentValues.TAG, "fetchFirstActiveBudget:onCancelled", databaseError.toException())
+            }
+        })
+
+    }
+
     fun fetchCategoriesFromDatabase(view: View, purpose: String) {
         val user = HelperUtils.getCurrentUser()
         if (user != null) {
@@ -78,15 +137,17 @@ class MainActivity : AppCompatActivity() {
                         categoriesList.add(categoryFromDB!!)
                     }
 
-                    if (purpose == "category_list") {
-                        view.categories_list.adapter = CategoriesAdapter(categoriesList, this@MainActivity)
-                        view.categories_list.layoutManager = LinearLayoutManager(baseContext)
-                    }
-                    else if (purpose == "spinner_expenses") {
-                        spinner = view.add_category_expenses_spinner
-                        val adapter = ArrayAdapter(this@MainActivity, R.layout.spinner_item, categoriesList.map { it.name })
-                        adapter.setDropDownViewResource(R.layout.spinner_item)
-                        spinner.adapter = adapter
+                    when (purpose) {
+                        "category_list" -> {
+                            view.categories_list.adapter = CategoriesAdapter(categoriesList, this@MainActivity)
+                            view.categories_list.layoutManager = LinearLayoutManager(baseContext)
+                        }
+                        "spinner_expenses" -> {
+                            spinner = view.add_category_expenses_spinner
+                            val adapter = ArrayAdapter(this@MainActivity, R.layout.spinner_item, categoriesList.map { it.name })
+                            adapter.setDropDownViewResource(R.layout.spinner_item)
+                            spinner.adapter = adapter
+                        }
                     }
                 }
             }
@@ -96,6 +157,56 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+    fun fetchFirstActiveBudget(homeView: View) {
+        val user = HelperUtils.getCurrentUser()
+        if (user != null) {
+            database = FirebaseDatabase.getInstance().getReference(user.uid).child("budgets")
+        }
+
+        val categoriesList: MutableList<CategoryBudget> = mutableListOf()
+
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    categoriesList.clear()
+                    for (budget in dataSnapshot.children) {
+                        val budgetFromDB = budget.getValue(Budget::class.java)
+                        if (budgetFromDB?.active == true) {
+                            budgetFromDB.categories?.forEach {
+                                val categoryBudget = CategoryBudget(it.name, it.plannedBudget, it.moneySpent)
+                                categoriesList.add(categoryBudget)
+                            }
+
+                            // set categories from budget to spinner
+                            spinner = homeView.choose_category_spinner
+                            val adapter = ArrayAdapter(this@MainActivity, R.layout.spinner_item, categoriesList.map { it.name })
+                            adapter.setDropDownViewResource(R.layout.spinner_item)
+                            spinner.adapter = adapter
+
+                            // set data to single budget
+                            homeView.single_budget_budget.text = budgetFromDB.plannedBudget
+                            homeView.single_budget_planned_expenses.text = budgetFromDB.plannedExpenses
+                            homeView.single_budget_expenses.text = budgetFromDB.moneySpent
+                            homeView.single_budget_date.text = budgetFromDB.dateEnd
+
+                            // set categories to single budget recycler view
+                            homeView.categories_single_budget.adapter = HomeAdapter(categoriesList, this@MainActivity)
+                            homeView.categories_single_budget.layoutManager = LinearLayoutManager(baseContext)
+
+                            return
+                        }
+                    }
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w(ContentValues.TAG, "fetchFirstActiveBudget:onCancelled", databaseError.toException())
+            }
+        })
+    }
+
 
     fun deleteCategoryFromDatabase(categoryToDelete: Category) {
         database = Firebase.database.reference

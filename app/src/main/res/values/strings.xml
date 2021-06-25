@@ -12,7 +12,7 @@
     <string name="new_expanse_period">New Expense Period</string>
     <string name="budget">Budget:</string>
     <string name="planned_expenses">Planned expenses:</string>
-    <string name="expense_period_date">Period date:</string>
+    <string name="expense_date">Pick date:</string>
     <string name="confirm_new_expense_period">Submit</string>
     <string name="add_new_category">New category</string>
     <string name="title_login">Login/Register</string>
@@ -21,19 +21,11 @@
     <string name="login">Login</string>
     <string name="register">Don\'t have an account? Register</string>
     <string name="register_button">Register</string>
-    <string name="pick_date">PICK DATE</string>
     <string name="category_budget">Category Budget</string>
     <string name="cancel">Cancel</string>
     <string name="_0">0</string>
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
-
+    <string name="expenses">Expenses:</string>
+    <string name="date_end">End Date:</string>
+    <string name="planned">Planned:</string>
+    <string name="money_spent">Spent:</string>
 </resources>

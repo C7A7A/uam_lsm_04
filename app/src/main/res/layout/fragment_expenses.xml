@@ -54,7 +54,7 @@
             android:id="@+id/expense_period_date_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/expense_period_date"
+            android:text="@string/expense_date"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_margin="5dp"/>
@@ -63,7 +63,6 @@
             android:id="@+id/expense_period_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/pick_date"
             android:textAlignment="center"
             android:layout_margin="5dp"
             android:layout_weight="1"
