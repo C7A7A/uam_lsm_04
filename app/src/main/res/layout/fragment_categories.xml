@@ -1,57 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/categories_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.categories.CategoriesFragment"
-    android:orientation="vertical"
-    android:gravity="top"
-    android:layout_margin="10dp">
-
-    <TextView
-        android:id="@+id/text_categories"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/title_categories"
-        android:textAlignment="textStart"
-        android:textSize="26sp"
-        android:textStyle="bold" />
-
+    android:fillViewport="true">
     <LinearLayout
+        android:id="@+id/categories_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        tools:context=".ui.categories.CategoriesFragment"
+        android:orientation="vertical"
         android:gravity="top"
-        android:layout_margin="5dp">
-        <EditText
-            android:id="@+id/add_new_category"
-            android:layout_width="0dp"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/text_categories"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:autofillHints=""
-            android:layout_weight="1"
-            android:hint="@string/add_new_category"
-            android:inputType="textPersonName"
-            android:textAlignment="center" />
+            android:text="@string/title_categories"
+            android:textAlignment="textStart"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/add_new_category_button"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="top"
+            android:layout_margin="5dp">
+            <EditText
+                android:id="@+id/add_new_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:autofillHints=""
+                android:layout_weight="1"
+                android:hint="@string/add_new_category"
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/add_new_category_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/add" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categories_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/single_category" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/add" />
+            android:text="" />
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/categories_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        tools:listitem="@layout/single_category"/>
-
-</LinearLayout>
+</ScrollView>

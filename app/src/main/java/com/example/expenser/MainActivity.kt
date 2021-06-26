@@ -1,15 +1,18 @@
 package com.example.expenser
 
+import android.app.AlertDialog
 import android.content.ContentValues
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.solver.widgets.Helper
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -24,9 +27,12 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.add_category_dialog.view.*
+import kotlinx.android.synthetic.main.budget_date_end_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_categories.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.fragment_single_budget.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity() {
 
@@ -70,6 +76,10 @@ class MainActivity : AppCompatActivity() {
         val id = database.push().key
         val user = HelperUtils.getCurrentUser()
 
+        if (newBudget.categories.isNullOrEmpty()) {
+            newBudget.categories?.add(CategoryBudget("Budget", newBudget.plannedBudget, "0"))
+        }
+
         database.child(user?.uid.toString()).child("budgets").child(id.toString()).setValue(newBudget)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -100,12 +110,13 @@ class MainActivity : AppCompatActivity() {
                             budgetFromDB.categories?.forEachIndexed { index, it ->
                                 if (it.name == categoryName) {
                                     val moneySpent = (it.moneySpent?.toInt()?.plus(categoryExpense.toInt())).toString()
-                                    val moneySpentBudget = (budgetFromDB.moneySpent?.toInt()?.plus(moneySpent.toInt())).toString()
+                                    val moneySpentBudget = (budgetFromDB.moneySpent?.toInt()?.plus(categoryExpense.toInt())).toString()
 
                                     database.child(budget.key.toString()).child("categories").child(index.toString()).child("moneySpent").setValue(moneySpent)
                                     database.child(budget.key.toString()).child("moneySpent").setValue(moneySpentBudget)
                                 }
                             }
+                            refreshActivity()
                             return
                         }
                     }
@@ -166,7 +177,8 @@ class MainActivity : AppCompatActivity() {
 
         val categoriesList: MutableList<CategoryBudget> = mutableListOf()
 
-        database.addValueEventListener(object : ValueEventListener {
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     categoriesList.clear()
@@ -193,6 +205,29 @@ class MainActivity : AppCompatActivity() {
                             // set categories to single budget recycler view
                             homeView.categories_single_budget.adapter = HomeAdapter(categoriesList, this@MainActivity)
                             homeView.categories_single_budget.layoutManager = LinearLayoutManager(baseContext)
+
+                            // check if budget dateEnd has passed
+                            val dateEnd = LocalDate.parse(budgetFromDB.dateEnd, DateTimeFormatter.ISO_DATE)
+                            if (dateEnd.isBefore(LocalDate.now())) {
+                                val dialogView = LayoutInflater.from(this@MainActivity).inflate(R.layout.budget_date_end_dialog, null)
+                                val builder = AlertDialog.Builder(this@MainActivity).setView(dialogView)
+
+                                builder.setTitle(R.string.budget_date_end_title)
+                                val alertDialog = builder.show()
+
+                                dialogView.budget_date_end_no.setOnClickListener {
+                                    alertDialog.dismiss()
+                                }
+
+                                dialogView.budget_date_end_yes.setOnClickListener {
+                                    database.child(budget.key.toString()).child("active").setValue(false)
+                                    Toast.makeText(this@MainActivity, "Budget submitted successfully", Toast.LENGTH_SHORT).show()
+
+                                    refreshActivity()
+
+                                    alertDialog.dismiss()
+                                }
+                            }
 
                             return
                         }
@@ -230,5 +265,13 @@ class MainActivity : AppCompatActivity() {
                 Log.w(ContentValues.TAG, "deleteCategory:onCancelled", databaseError.toException())
             }
         })
+    }
+
+    // refresh activity
+    private fun refreshActivity() {
+        finish()
+        overridePendingTransition(0, 0)
+        startActivity(intent)
+        overridePendingTransition(0, 0)
     }
 }

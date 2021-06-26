@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.analytics.AnalyticsFragment"
-    android:orientation="vertical"
-    android:gravity="top"
-    android:layout_margin="10dp">
-
-    <TextView
-        android:id="@+id/text_analytics"
+    android:fillViewport="true">
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/title_analytics"
-        android:textAlignment="textStart"
-        android:textSize="26sp"
-        android:textStyle="bold" />
-</LinearLayout>
+        tools:context=".ui.analytics.AnalyticsFragment"
+        android:orientation="vertical"
+        android:gravity="top"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/text_analytics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/title_analytics"
+            android:textAlignment="textStart"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>

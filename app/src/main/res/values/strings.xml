@@ -28,4 +28,8 @@
     <string name="date_end">End Date:</string>
     <string name="planned">Planned:</string>
     <string name="money_spent">Spent:</string>
+    <string name="budget_date_end">Do you want to submit this budget?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="budget_date_end_title">Finish date has passed</string>
 </resources>

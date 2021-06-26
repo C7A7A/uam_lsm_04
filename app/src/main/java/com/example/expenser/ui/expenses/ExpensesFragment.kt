@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,15 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expenser.MainActivity
 import com.example.expenser.R
 import com.example.expenser.data.Budget
-import com.example.expenser.data.Category
 import com.example.expenser.data.CategoryBudget
-import com.example.expenser.ui.categories.CategoriesAdapter
-import com.example.expenser.ui.categories.CategoriesViewModel
 import kotlinx.android.synthetic.main.add_category_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_categories.view.*
 import kotlinx.android.synthetic.main.fragment_expenses.*
 import kotlinx.android.synthetic.main.fragment_expenses.view.*
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*

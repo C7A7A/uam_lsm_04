@@ -1,54 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout2"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.LoginFragment"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_margin="10dp">
-
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/ic_login_black_24dp" />
-
-    <EditText
-        android:id="@+id/email_login"
+    android:fillViewport="true">
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_email"
-        android:inputType="textEmailAddress"
-        android:layout_margin="5dp"
-        android:textColor="#000"
-        android:textColorHint="#000"
-        android:textSize="18sp" />
+        tools:context=".ui.login.LoginFragment"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp">
 
-    <EditText
-        android:id="@+id/password_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_password"
-        android:textColor="#000"
-        android:inputType="textPassword"
-        android:layout_margin="5dp"
-        android:textSize="18sp"
-        android:textColorHint="#000"/>
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_login_black_24dp" />
 
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:layout_margin="5dp"/>
+        <EditText
+            android:id="@+id/email_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress"
+            android:layout_margin="5dp"
+            android:textColor="#000"
+            android:textColorHint="#000"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/text_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:gravity="center"/>
+        <EditText
+            android:id="@+id/password_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_password"
+            android:textColor="#000"
+            android:inputType="textPassword"
+            android:layout_margin="5dp"
+            android:textSize="18sp"
+            android:textColorHint="#000"/>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/text_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:gravity="center"/>
+
+    </LinearLayout>
+</ScrollView>

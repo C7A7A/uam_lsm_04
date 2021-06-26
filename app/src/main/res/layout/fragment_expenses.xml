@@ -1,133 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.expenses.ExpensesFragment"
-    android:orientation="vertical"
-    android:layout_margin="10dp">
-
-    <TextView
-        android:id="@+id/text_expenses"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/new_expanse_period"
-        android:textAlignment="textStart"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:layout_margin="5dp"/>
-
+    android:fillViewport="true">
     <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="top"
-        android:layout_marginTop="5dp">
+        tools:context=".ui.expenses.ExpensesFragment"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
         <TextView
-            android:id="@+id/budget_label"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_expenses"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/budget"
-            android:textSize="18sp"
+            android:text="@string/new_expanse_period"
+            android:textAlignment="textStart"
+            android:textSize="26sp"
             android:textStyle="bold"
             android:layout_margin="5dp"/>
 
-        <EditText
-            android:id="@+id/budget"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:inputType="number"
-            android:textAlignment="center"
-            android:layout_weight="1"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:gravity="top"
+            android:layout_marginTop="5dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="top">
-        <TextView
-            android:id="@+id/expense_period_date_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/expense_date"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_margin="5dp"/>
+            <TextView
+                android:id="@+id/budget_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/budget"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="5dp"/>
 
-        <TextView
-            android:id="@+id/expense_period_date"
-            android:layout_width="0dp"
+            <EditText
+                android:id="@+id/budget"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:inputType="number"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:orientation="horizontal"
+            android:gravity="top">
+            <TextView
+                android:id="@+id/expense_period_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expense_date"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/expense_period_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:background="@android:color/darker_gray"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/add_new_category_expenses"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/add_new_category"
+                android:textSize="12sp"
+                android:layout_margin="5dp"/>
+
+            <Button
+                android:id="@+id/submit_new_expenses"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/confirm_new_expense_period"
+                android:textSize="12sp"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="top">
+
+            <TextView
+                android:id="@+id/planned_expenses_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/planned_expenses"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/planned_expenses"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:text="@string/_0"
+                android:textAlignment="center"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/expenses_categories_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:background="@android:color/darker_gray"/>
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/single_category"/>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/add_new_category_expenses"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/add_new_category"
-            android:textSize="12sp"
-            android:layout_margin="5dp"/>
-
-        <Button
-            android:id="@+id/submit_new_expenses"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/confirm_new_expense_period"
-            android:textSize="12sp"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="top">
-
-        <TextView
-            android:id="@+id/planned_expenses_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/planned_expenses"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/planned_expenses"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:text="@string/_0"
-            android:textAlignment="center"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:textSize="16sp"/>
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/expenses_categories_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        tools:listitem="@layout/single_category"/>
-</LinearLayout>
+</ScrollView>

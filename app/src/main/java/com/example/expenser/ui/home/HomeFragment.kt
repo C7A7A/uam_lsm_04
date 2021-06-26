@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -29,9 +28,12 @@ class HomeFragment : Fragment() {
             val expense = homeView.insert_expense.text.toString()
             val category = homeView.choose_category_spinner.selectedItem.toString()
 
-            (activity as MainActivity).updateActiveBudget(homeView, category, expense)
+            if (expense.isNotBlank()) {
+                (activity as MainActivity).updateActiveBudget(homeView, category, expense)
+            }
         }
 
         return homeView
     }
+
 }
