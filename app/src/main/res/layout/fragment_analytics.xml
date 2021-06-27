@@ -11,16 +11,27 @@
         tools:context=".ui.analytics.AnalyticsFragment"
         android:orientation="vertical"
         android:gravity="top"
-        android:layout_margin="10dp">
+        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/text_analytics"
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pie_chart_analytics"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/title_analytics"
-            android:textAlignment="textStart"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+            android:layout_height="500dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bar_chart_analytics"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginTop="40dp"
+            android:padding="40dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/analytics_budgets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/single_budget_overview"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 </ScrollView>

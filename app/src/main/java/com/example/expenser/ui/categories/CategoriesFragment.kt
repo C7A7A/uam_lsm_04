@@ -1,31 +1,15 @@
 package com.example.expenser.ui.categories
 
-import android.content.ContentValues
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.expenser.HelperUtils
-import com.example.expenser.LoginActivity
 import com.example.expenser.MainActivity
 import com.example.expenser.R
-import com.example.expenser.data.Category
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.*
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.fragment_categories.*
 import kotlinx.android.synthetic.main.fragment_categories.view.*
-import kotlinx.android.synthetic.main.single_category.view.*
 
 class CategoriesFragment : Fragment() {
 
