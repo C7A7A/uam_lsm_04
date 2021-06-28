@@ -3,13 +3,12 @@
     <string name="title_home">Home</string>
     <string name="title_expenses">Expenses</string>
     <string name="title_analytics">Analytics</string>
-    <string name="title_categories">Categories</string>
+    <string name="title_categories">Categories List</string>
     <string name="expenser">Expenser</string>
     <string name="expenser_descriptions">Observe your expenses</string>
     <string name="add">Add</string>
     <string name="insert_expense">Insert expense</string>
     <string name="choose_category">category</string>
-    <string name="new_expanse_period">New Expense Period</string>
     <string name="budget">Budget:</string>
     <string name="planned_expenses">Planned expenses:</string>
     <string name="expense_date">Pick date:</string>
@@ -35,4 +34,8 @@
     <string name="active">Active:</string>
     <string name="end_budget_period">End Budget Period</string>
     <string name="budget_date_end_title_manualy">Manualy submit budget</string>
+    <string name="analytics_pie_chart_title">Money spent per category</string>
+    <string name="analytics_bar_chart_title">Money spent/Planned budget per category</string>
+    <string name="budget_list">Budget list</string>
+    <string name="new_budget">Add new budget</string>
 </resources>

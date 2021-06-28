@@ -13,17 +13,49 @@
         android:gravity="top"
         android:padding="10dp">
 
+        <TextView
+            android:id="@+id/analytics_pie_chart_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/analytics_pie_chart_title"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
+
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pie_chart_analytics"
             android:layout_width="match_parent"
-            android:layout_height="500dp" />
+            android:layout_height="500dp"
+            />
+
+        <TextView
+            android:id="@+id/analytics_bar_chart_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/analytics_bar_chart_title"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"/>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/bar_chart_analytics"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:layout_marginTop="40dp"
-            android:padding="40dp"/>
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:id="@+id/analytics_budgets_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/budget_list"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/analytics_budgets"
@@ -32,6 +64,6 @@
             android:clipToPadding="false"
             android:scrollbars="vertical"
             tools:listitem="@layout/single_budget_overview"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="5dp" />
     </LinearLayout>
 </ScrollView>

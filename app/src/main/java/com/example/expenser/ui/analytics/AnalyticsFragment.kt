@@ -28,6 +28,7 @@ class AnalyticsFragment : Fragment() {
         val analyticsView: View = inflater.inflate(R.layout.fragment_analytics, container, false)
 
         (activity as MainActivity).fetchDataAboutCategories(analyticsView)
+        (activity as MainActivity).fetchBudgetsFromDatabase(analyticsView)
 
         return analyticsView
     }

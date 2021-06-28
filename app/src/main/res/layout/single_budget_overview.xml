@@ -4,8 +4,13 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardCornerRadius="4dp"
+    app:cardCornerRadius="16dp"
     android:layout_margin="2dp">
+
+    <FrameLayout
+        android:background="@color/blue"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"/>
 
     <LinearLayout
         android:id="@+id/single_budget_overview_layout"
@@ -14,6 +19,7 @@
         android:orientation="vertical"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:background="@color/white_3"
         >
 
         <LinearLayout
@@ -37,7 +43,8 @@
                     android:text="@string/date_end"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:width="75dp"/>
+                    android:textColor="@color/black"
+                    android:width="75dp" />
                 <TextView
                     android:id="@+id/single_budget_overview_date"
                     android:layout_width="match_parent"
@@ -54,20 +61,27 @@
                 android:orientation="horizontal"
                 android:gravity="end">
                 <TextView
+                    android:id="@+id/single_budget_overview_active_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/active"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:width="75dp"
+                    android:textColor="@color/black"
                     android:layout_marginStart="20dp"/>
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="true"
-                    android:textSize="16sp"
-                    android:textAlignment="center"
-                    android:minWidth="100dp"/>
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/single_budget_overview_active"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -91,6 +105,7 @@
                     android:text="@string/budget"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:width="75dp"/>
                 <TextView
                     android:id="@+id/single_budget_overview_budget"
@@ -108,14 +123,17 @@
                 android:orientation="horizontal"
                 android:gravity="end">
                 <TextView
+                    android:id="@+id/single_budget_overview_expenses_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/expenses"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:width="75dp"
+                    android:textColor="@color/black"
                     android:layout_marginStart="20dp"/>
                 <TextView
+                    android:id="@+id/single_budget_overview_expenses"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3750"
@@ -130,6 +148,6 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:scrollbars="vertical"
-            tools:listitem="@layout/single_budget_category"/>
+            tools:listitem="@layout/single_budget_category" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expenser.data.Budget
 import com.example.expenser.data.Category
 import com.example.expenser.data.CategoryBudget
+import com.example.expenser.ui.analytics.AnalyticsBudgetsAdapter
 import com.example.expenser.ui.analytics.AnalyticsViewModel
 import com.example.expenser.ui.categories.CategoriesAdapter
 import com.example.expenser.ui.home.HomeAdapter
@@ -48,6 +49,7 @@ import java.time.format.DateTimeFormatter
 class MainActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
+    private lateinit var budgetsList: MutableList<Budget>
     private lateinit var categoriesList: MutableList<Category>
     private lateinit var categoriesData: MutableMap<String, MutableList<Int>>
     lateinit var spinner: Spinner
@@ -205,6 +207,35 @@ class MainActivity : AppCompatActivity() {
                             spinner.adapter = adapter
                         }
                     }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w(ContentValues.TAG, "fetchCategories:onCancelled", databaseError.toException())
+            }
+        })
+    }
+
+    fun fetchBudgetsFromDatabase(view: View) {
+        val user = HelperUtils.getCurrentUser()
+        if (user != null) {
+            database = FirebaseDatabase.getInstance().getReference(user.uid).child("budgets")
+        }
+
+        budgetsList = mutableListOf()
+
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    budgetsList.clear()
+                    for (budget in dataSnapshot.children) {
+                        val budgetFromDB = budget.getValue(Budget::class.java)
+                        budgetsList.add(budgetFromDB!!)
+                    }
+
+                    view.analytics_budgets.adapter = AnalyticsBudgetsAdapter(budgetsList, this@MainActivity)
+                    view.analytics_budgets.layoutManager = LinearLayoutManager(baseContext)
+
                 }
             }
 

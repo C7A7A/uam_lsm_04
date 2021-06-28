@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:layout_margin="10dp"
     android:layout_gravity="top"
-    tools:context=".ui.expenses.ExpensesFragment">
+    tools:context=".ui.expenses.ExpensesFragment"
+    android:padding="20dp">
 
     <Spinner
         android:id="@+id/add_category_expenses_spinner"
@@ -38,7 +39,8 @@
             android:layout_weight="1"
             android:text="@string/cancel"
             android:textSize="12sp"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/red"/>
 
         <Button
             android:id="@+id/add_category_expenses_add"
@@ -47,7 +49,8 @@
             android:layout_weight="1"
             android:text="@string/add"
             android:textSize="12sp"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/green"/>
     </LinearLayout>
 
 </LinearLayout>
