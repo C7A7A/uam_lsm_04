@@ -33,4 +33,6 @@
     <string name="no">No</string>
     <string name="budget_date_end_title">Finish date has passed</string>
     <string name="active">Active:</string>
+    <string name="end_budget_period">End Budget Period</string>
+    <string name="budget_date_end_title_manualy">Manualy submit budget</string>
 </resources>

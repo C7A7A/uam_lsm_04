@@ -39,6 +39,7 @@ import kotlinx.android.synthetic.main.add_category_dialog.view.*
 import kotlinx.android.synthetic.main.budget_date_end_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_analytics.view.*
 import kotlinx.android.synthetic.main.fragment_categories.view.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.fragment_single_budget.view.*
 import java.time.LocalDate
@@ -140,6 +141,40 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+
+    fun submitFirstActiveBudget() {
+        database = Firebase.database.reference
+
+        val user = HelperUtils.getCurrentUser()
+        if (user != null) {
+            database = FirebaseDatabase.getInstance().getReference(user.uid).child("budgets")
+        }
+
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (budget in dataSnapshot.children) {
+                        val budgetFromDB = budget.getValue(Budget::class.java)
+                        if (budgetFromDB?.active == true) {
+                            database.child(budget.key.toString()).child("active").setValue(false)
+
+                            Toast.makeText(this@MainActivity, "Budget submitted successfully", Toast.LENGTH_SHORT).show()
+
+                            refreshActivity()
+
+                            return
+                        }
+                    }
+                    Toast.makeText(this@MainActivity, "You don't have any active budget", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w(ContentValues.TAG, "submitFirstActiveBudget:onCancelled", databaseError.toException())
+            }
+        })
+    }
+
 
     fun fetchCategoriesFromDatabase(view: View, purpose: String) {
         val user = HelperUtils.getCurrentUser()
