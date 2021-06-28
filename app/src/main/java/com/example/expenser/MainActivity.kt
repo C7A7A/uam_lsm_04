@@ -15,7 +15,6 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    fun updateActiveBudget(view: View, categoryName: String, categoryExpense: String) {
+    fun updateActiveBudget(categoryName: String, categoryExpense: String) {
         database = Firebase.database.reference
 
         val user = HelperUtils.getCurrentUser()
