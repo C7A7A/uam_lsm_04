@@ -28,11 +28,10 @@ class HomeFragment : Fragment() {
         (activity as MainActivity).fetchFirstActiveBudget(homeView)
 
         homeView.add_expense_button.setOnClickListener {
-            val expense = homeView.insert_expense.text.toString()
-            val category = homeView.choose_category_spinner.selectedItem.toString()
-
-            if (expense.isNotBlank()) {
-                (activity as MainActivity).updateActiveBudget(homeView, category, expense)
+            if (homeView.insert_expense.text.isNotEmpty() && homeView.choose_category_spinner.count > 0) {
+                val expense = homeView.insert_expense.text
+                val category = homeView.choose_category_spinner.selectedItem
+                (activity as MainActivity).updateActiveBudget(category.toString(), expense.toString())
             }
         }
 

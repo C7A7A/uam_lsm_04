@@ -34,7 +34,6 @@ class RegisterFragment : Fragment() {
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(context, "Email and password can't be empty", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, "$email $password", Toast.LENGTH_SHORT).show()
                 (activity as LoginActivity).registerUser(email, password)
             }
         }

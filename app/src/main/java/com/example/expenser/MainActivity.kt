@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                             return
                         }
                     }
-
+                    Toast.makeText(this@MainActivity, "You don't have any active budget", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -160,13 +160,11 @@ class MainActivity : AppCompatActivity() {
                             database.child(budget.key.toString()).child("active").setValue(false)
 
                             Toast.makeText(this@MainActivity, "Budget submitted successfully", Toast.LENGTH_SHORT).show()
-
                             refreshActivity()
-
                             return
                         }
                     }
-                    Toast.makeText(this@MainActivity, "You don't have any active budget", Toast.LENGTH_SHORT).show()
+                    return
                 }
             }
 
